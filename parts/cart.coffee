@@ -212,7 +212,7 @@ if Meteor.isServer
             model:'thing'
             status:'cart'
             _author_id: Meteor.userId()
-            app:'nf'
+            app:'bcc'
             # order_id:current_order._id            
             
     Meteor.publish 'my_cart_order', ->

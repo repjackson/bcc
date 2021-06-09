@@ -6,59 +6,44 @@ template(name='nav')
                 i.big.loading.grey.food.icon.cancel
         else 
             a.icon.item.toggle_leftbar.no_blink
-                // .ui.avatar.image.leftmenu
-                .ui.avatar.image
-                    .mobile.hidden
-                        +i name='menu--v1'
-                    img.ui.avatar.image.mobile.only(src="/android-chrome-96x96.png")
+               i.bars.large.icon 
         a.header.item.zoomer.mobile.hidden(href='/')
-            // +i name='food' cl='ui inline mini image'
-            // i.home.icon
-            // |Nude Foods Market
             .mobile.hidden
                 |Boulder Creek Community
                 // img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
-            img.ui.avatar.image.mobile.only(src="/android-icon-48x48.png")
+            // img.ui.avatar.image.mobile.only(src="/android-icon-48x48.png")
+            i.large.home.icon.mobile.only
             // span.mobile.hidden nude foods market
-        a.header.item.zoomer.mobile.hidden(href='/about')
-            // +i name='food' cl='ui inline mini image'
-            // i.home.icon
-            // |Nude Foods Market
+        a.header.item.zoomer.mobile.hidden(href='/about' class="{{isActivePath '/about'}}")
             .mobile.hidden
                 i.info.icon
                 |about
-            // span.mobile.hidden nude foods market
-        // .search.item.zoomer.mobile.hidden(title='search')
-            // .ui.icon.transparent.large.input
-            //     i.search.icon
-            //     input.search_ingredients(type='text')
-        // a.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-        //     // +i name='list' cl='ui inline mini image'
-        //     i.newspaper.large.icon
-        //     // strong.mobile.hidden news
+        a.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
+            i.newspaper.icon
+            |blog
         .right.menu
             if currentUser
-                // a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
-                //     i.bell.large.yellow.icon
+                a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
+                    i.bell.large.yellow.icon
                 // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
                 if cart_items.count
                     a.icon.item(href='/cart')
-                        // i.large.cart.icon
+                        i.large.cart.icon
                         strong #{cart_items.count}
                         |$#{my_cart_subtotal}
-                        .ui.avatar.image.cart
-                            +i name='shopping-cart' cl=''
+                        // .ui.avatar.image.cart
+                        //     +i name='shopping-cart' cl=''
                         each cart_items
                             img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
-                a.item.toggle_topbar(title='alerts')
-                    // i.wallet.icon
-                    .ui.avatar.image.bell
-                        +i name='notification' cl=''
+                a.icon.item.toggle_topbar(title='alerts')
+                    i.alerts.icon
+                    // .ui.avatar.image.bell
+                    //     +i name='notification' cl=''
                 // a.item(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                 a.item.toggle_walletbar(title='credit')
-                    // i.wallet.icon
-                    .ui.avatar.image
-                        +i name='wallet' cl=''
+                    i.wallet.icon
+                    // .ui.avatar.image
+                    //     +i name='wallet' cl=''
                     strong ${{int currentUser.credit}}
                     // i.cart.icon
                 // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
@@ -91,38 +76,46 @@ template(name='nav')
 template(name='secnav')
     .ui.attached.small.borderless.menu.secnav
         a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            .ui.mini.image
-                +i name='grocery-shelf' cl=''
+            i.large.shop.icon
+            // .ui.mini.image
+            //     +i name='grocery-shelf' cl=''
         // a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
         //     .ui.mini.image
         //         +i name='ingredients' cl=''
         a.icon.item(href='/pictures' class="{{isActivePath '/pictures'}}" title='pictures')
-            .ui.mini.image.farm
-                +i name='picture' cl=''
+            i.picture.large.icon
+            // .ui.mini.image.farm
+            //     +i name='picture' cl=''
         a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
-            .ui.mini.image.recipes
-                +i name='cookbook' cl=''
+            i.food.large.icon
+        a.icon.item(href='/carshare' class="{{isActivePath '/carshare'}}" title='carshare')
+            i.large.car.icon
         a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            .ui.mini.image.orders
-                +i name='invoice' cl=''
+            i.money.large.icon
+            // .ui.mini.image.orders
+            //     +i name='invoice' cl=''
         a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            .ui.mini.image
-                +i name='blog' cl=''
+            i.newspaper.large.icon
+            // .ui.mini.image
+            //     +i name='blog' cl=''
         a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
-            .ui.mini.image
-                +i name='bicycle' cl=''
+            i.bicycle.large.icon
+            // .ui.mini.image
+            //     +i name='bicycle' cl=''
         a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-            .ui.mini.image
-                +i name='phone' cl='ui inline mini image'
+            i.phone.large.icon
+            // .ui.mini.image
+            //     +i name='phone' cl='ui inline mini image'
         if currentUser
             a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
-                .ui.mini.image.users
-                    +i name='groups' cl=''
-        unless currentUser
-            a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-                // i.info.large.icon
-                .ui.mini.image.info
-                    +i name='information--v1' cl=''
+                i.large.users.icon
+                // .ui.mini.image.users
+                //     +i name='groups' cl=''
+        // unless currentUser
+        //     a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
+        //         // i.info.large.icon
+        //         .ui.mini.image.info
+        //             +i name='information--v1' cl=''
 
 template(name='my_latest_activity')
     .ui.grey.header 
@@ -153,28 +146,28 @@ template(name='footer')
     .ui.stackable.padded.grid
         .four.column.row
             .column
-                .ui.link.list
-                    a.item hello@nudefoodsmarket.com
-                    a.item 555 30th Street
-                    a.item Boulder, CO 80303
+                // .ui.link.list
+                //     a.item hello@nudefoodsmarket.com
+                //     a.item 555 30th Street
+                //     a.item Boulder, CO 80303
                     a.item (720) 815-5588
             .column
                 .ui.link.animated.selection.grey.list
                     a.item(href="/") 
                         i.home.icon
-                        |Home
+                        |home
                     a.item(href="/cart") 
                         i.cart.icon
-                        |Cart
+                        |cart
                     a.item(href='/contact')
                         i.phone.icon
-                        |Contact us
-                    a.item 
+                        |contact us
+                    a.item
                         i.smile.icon
-                        |Get Involved
+                        |get involved
                     a.item(href='/account') 
                         i.user.icon
-                        | Account
+                        | account
                     // a.item(href='/p/newsletter') 
                     //     i.newspaper.icon
                     //     | Newsletter
@@ -190,15 +183,12 @@ template(name='footer')
                     // a.item(href='/produce') 
                     //     i.food.icon
                     //     | Produce
-                    // a.item(href='/packaging') 
-                    //     i.box.icon
-                    //     | Packaging
-                    // a.item(href='/p/local_products') 
-                    //     i.plant.icon
-                    //     | Local Products
+                    a.item(href='/carshare') 
+                        i.car.icon
+                        | carshare
                     a.item(href='/shop') 
                         i.shop.icon
-                        | Shop
+                        | shop
             // .column
             //     +icolor name='facebook'
             //     +icolor name='instagram'
