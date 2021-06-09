@@ -16,7 +16,8 @@ template(name='nav')
             // i.home.icon
             // |Nude Foods Market
             .mobile.hidden
-                img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+                |Boulder Creek Community
+                // img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             img.ui.avatar.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
         .search.item.zoomer.mobile.hidden(title='search')
@@ -33,7 +34,7 @@ template(name='nav')
                 //     i.bell.large.yellow.icon
                 // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
                 if cart_items.count
-                    a.icon.item.toggle_cartbar
+                    a.icon.item(href='/cart')
                         // i.large.cart.icon
                         strong #{cart_items.count}
                         |$#{my_cart_subtotal}
@@ -84,12 +85,12 @@ template(name='secnav')
         a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image
                 +i name='grocery-shelf' cl=''
-        a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
-            .ui.mini.image
-                +i name='ingredients' cl=''
-        a.icon.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
+        // a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
+        //     .ui.mini.image
+        //         +i name='ingredients' cl=''
+        a.icon.item(href='/pictures' class="{{isActivePath '/pictures'}}" title='pictures')
             .ui.mini.image.farm
-                +i name='field-and-tractor' cl=''
+                +i name='picture' cl=''
         a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             .ui.mini.image.recipes
                 +i name='cookbook' cl=''
@@ -105,9 +106,6 @@ template(name='secnav')
         a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
             .ui.mini.image
                 +i name='phone' cl='ui inline mini image'
-        a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
-            .ui.mini.image
-                +i name='cup' cl=''
         if currentUser
             a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
                 .ui.mini.image.users
@@ -147,8 +145,6 @@ template(name='footer')
     .ui.stackable.padded.grid
         .four.column.row
             .column
-                img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
-            
                 .ui.link.list
                     a.item hello@nudefoodsmarket.com
                     a.item 555 30th Street
@@ -171,40 +167,33 @@ template(name='footer')
                     a.item(href='/account') 
                         i.user.icon
                         | Account
-                    a.item(href='/p/newsletter') 
-                        i.newspaper.icon
-                        | Newsletter
-                    a.item(href='/p/team') 
+                    // a.item(href='/p/newsletter') 
+                    //     i.newspaper.icon
+                    //     | Newsletter
+                    a.item(href='/members') 
                         i.users.icon
-                        | Nude Foods Team
-                    a.item(hre='/p/refer') 
-                        i.reply.icon
-                        |Refer a Friend
-                    a.item(href='/p/transparency')
-                        |Transparency
-                    a.item(href='/p/hiring') 
-                        | We’re hiring!
+                        | members
             .column
                 .ui.link.animated.selection.list
-                    a.item(href='/p/faq') FAQ
-                    a.item(href='p/how') How we work
-                    a.item(href='/p/privacy-policy') Privacy policy
-                    a.item(href='/p/tos') Terms of Service
-                    a.item(href='/produce') 
-                        i.food.icon
-                        | Produce
-                    a.item(href='/packaging') 
-                        i.box.icon
-                        | Packaging
-                    a.item(href='/p/local_products') 
-                        i.plant.icon
-                        | Local Products
+                    // a.item(href='/p/faq') FAQ
+                    // a.item(href='p/how') How we work
+                    // a.item(href='/p/privacy-policy') Privacy policy
+                    // a.item(href='/p/tos') Terms of Service
+                    // a.item(href='/produce') 
+                    //     i.food.icon
+                    //     | Produce
+                    // a.item(href='/packaging') 
+                    //     i.box.icon
+                    //     | Packaging
+                    // a.item(href='/p/local_products') 
+                    //     i.plant.icon
+                    //     | Local Products
                     a.item(href='/shop') 
                         i.shop.icon
                         | Shop
-            .column
-                +icolor name='facebook'
-                +icolor name='instagram'
+            // .column
+            //     +icolor name='facebook'
+            //     +icolor name='instagram'
 
 
 
