@@ -23,8 +23,6 @@ template(name='nav')
             |blog
         .right.menu
             if currentUser
-                a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
-                    i.bell.large.yellow.icon
                 // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
                 if cart_items.count
                     a.icon.item(href='/cart')
@@ -36,6 +34,7 @@ template(name='nav')
                         each cart_items
                             img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
                 a.icon.item.toggle_topbar(title='alerts')
+                    i.bell.large.outline.icon
                     i.alerts.icon
                     // .ui.avatar.image.bell
                     //     +i name='notification' cl=''
@@ -74,7 +73,7 @@ template(name='nav')
         
                 
 template(name='secnav')
-    .ui.attached.small.borderless.menu.secnav
+    .ui.attached.borderless.menu.secnav
         a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             i.large.shop.icon
             // .ui.mini.image
@@ -88,7 +87,7 @@ template(name='secnav')
             //     +i name='picture' cl=''
         a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             i.food.large.icon
-        a.icon.item(href='/carshare' class="{{isActivePath '/carshare'}}" title='carshare')
+        a.icon.item(href='/cars' class="{{isActivePath '/cars'}}" title='cars')
             i.large.car.icon
         a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             i.money.large.icon
@@ -144,8 +143,8 @@ template(name='latest_activity')
 
 template(name='footer')
     .ui.stackable.padded.grid
-        .four.column.row
-            .column
+        .three.column.row
+            // .column
                 // .ui.link.list
                 //     a.item hello@nudefoodsmarket.com
                 //     a.item 555 30th Street
@@ -183,9 +182,9 @@ template(name='footer')
                     // a.item(href='/produce') 
                     //     i.food.icon
                     //     | Produce
-                    a.item(href='/carshare') 
+                    a.item(href='/cars') 
                         i.car.icon
-                        | carshare
+                        | cars
                     a.item(href='/shop') 
                         i.shop.icon
                         | shop
@@ -286,7 +285,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.borderless.menu.smallscroll
+    .ui.left.sidebar.vertical.menu.smallscroll
         // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
@@ -305,8 +304,9 @@ template(name='left_sidebar')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         a.item.toggle_leftbar(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            .ui.avatar.image
-                +i name='food-cart' cl=''
+            i.shop.icon
+            // .ui.avatar.image
+            //     +i name='food-cart' cl=''
             | #{product_count} products
         // a.item.toggle_leftbar(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
             

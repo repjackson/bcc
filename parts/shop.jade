@@ -11,7 +11,7 @@ template(name='shop')
                     i.search.icon
                 input#product_search(type='text' placeholder='title...' value=product_query)
             if currentUser
-                a.ui.icon.button.add_product(title='cook')
+                a.ui.icon.button.add_product(title='add product')
                     i.plus.green.large.icon
             
             // .ui.left.icon.search.input
@@ -20,10 +20,10 @@ template(name='shop')
             // if picked_ingredient_plural
             //     .ui.icon.black.compact.button.clear_picked_ingredients
             //         i.remove.icon
-            .ui.basic.icon.button.toggle_gf(class=toggle_gf_class)
-                +icolor name='no-gluten' cl='ui mini inline image'
-            .ui.basic.icon.button.toggle_vegan(class=toggle_vegan_class)
-                +i name='vegan-food' cl='ui mini inline image'
+            // .ui.basic.icon.button.toggle_gf(class=toggle_gf_class)
+            //     +icolor name='no-gluten' cl='ui mini inline image'
+            // .ui.basic.icon.button.toggle_vegan(class=toggle_vegan_class)
+            //     +i name='vegan-food' cl='ui mini inline image'
             each picked_ingredients
                 button.ui.blue.compact.small.button.unpick_ingredient(tabindex='0')
                     //- i.remove.icon
