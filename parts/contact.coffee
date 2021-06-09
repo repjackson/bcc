@@ -3,6 +3,10 @@ if Meteor.isClient
         @layout 'layout'
         @render 'contact'
         ), name:'contact'
+    Router.route '/about', (->
+        @layout 'layout'
+        @render 'about'
+        ), name:'about'
 
 
     Template.contact.onCreated ->

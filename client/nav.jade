@@ -20,10 +20,18 @@ template(name='nav')
                 // img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             img.ui.avatar.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
-        .search.item.zoomer.mobile.hidden(title='search')
-            .ui.icon.transparent.large.input
-                i.search.icon
-                input.search_ingredients(type='text')
+        a.header.item.zoomer.mobile.hidden(href='/about')
+            // +i name='food' cl='ui inline mini image'
+            // i.home.icon
+            // |Nude Foods Market
+            .mobile.hidden
+                i.info.icon
+                |about
+            // span.mobile.hidden nude foods market
+        // .search.item.zoomer.mobile.hidden(title='search')
+            // .ui.icon.transparent.large.input
+            //     i.search.icon
+            //     input.search_ingredients(type='text')
         // a.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
         //     // +i name='list' cl='ui inline mini image'
         //     i.newspaper.large.icon

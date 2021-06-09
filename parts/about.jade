@@ -1,8 +1,8 @@
 template(name='about')
-    .ui.header ABOUT US
-    .ui.two.column.grid
+    .ui.two.column.padded.grid
         .column
-            img(src="https://img1.wsimg.com/isteam/ip/e8847b5c-4e57-4536-80f4-32e7c5632531/a382f3d5-45fa-4fb0-b256-87921e0307a4.jpg/:/rs=w:538,h:269,cg:true,m/cr=w:538,h:269")
+            .ui.header ABOUT US
+            img.ui.fluid.image(src="https://img1.wsimg.com/isteam/ip/e8847b5c-4e57-4536-80f4-32e7c5632531/a382f3d5-45fa-4fb0-b256-87921e0307a4.jpg/:/rs=w:538,h:269,cg:true,m/cr=w:538,h:269")
         .column
             p
                 |Non-traditional co-housing design
@@ -18,15 +18,15 @@ template(name='about')
                 |Service to ourselves that promotes personal and interpersonal growth (events include heart centered activities like yoga of laughter, drumming, poetry night, morning meditation, and personal growth workshops).
                 |Service to the general public that promotes education about and opportunities to experience community living (also known as the Community Learning Center or CLC). This is an intentional way to host guests or “community explorers” from all over the world who are curious about community living. See the Visit Us page for details.
         .column
-            img(src="https://img1.wsimg.com/isteam/ip/e8847b5c-4e57-4536-80f4-32e7c5632531/159db28a-e87c-464b-8397-68ad305a0e67.jpeg/:/rs=w:538,h:269,cg:true,m/cr=w:538,h:269")
-    .ui.two.column.grid
+            img.ui.fluid.image(src="https://img1.wsimg.com/isteam/ip/e8847b5c-4e57-4536-80f4-32e7c5632531/159db28a-e87c-464b-8397-68ad305a0e67.jpeg/:/rs=w:538,h:269,cg:true,m/cr=w:538,h:269")
+    .ui.two.column.padded.grid
         .column
             .ui.header Founder, Greg Sherwin
             p 
                 |Boulder Creek Community was founded in 2007 by visionary Greg Sherwin who had a dream of creating a more affordable urban cohousing community in the heart of Boulder, Colorado. Greg traveled to 55 cohousing and intentional communities around the country researching his dream before settling on an unconventional model for Boulder Creek Community.
         .column
-            img(src="https://img1.wsimg.com/isteam/ip/e8847b5c-4e57-4536-80f4-32e7c5632531/b77d7acd-0f65-4031-9505-423b68c428bc.jpg/:/rs=w:538,h:269,cg:true,m/cr=w:538,h:269")
-    .ui.two.column.grid
+            img.ui.fluid.image(src="https://img1.wsimg.com/isteam/ip/e8847b5c-4e57-4536-80f4-32e7c5632531/b77d7acd-0f65-4031-9505-423b68c428bc.jpg/:/rs=w:538,h:269,cg:true,m/cr=w:538,h:269")
+    .ui.two.column.padded.grid
         .column
             |VISION AND MISSION STATEMENT
             |BCC VISION/MISSION/PURPOSE STATEMENT, 2018/19
@@ -34,19 +34,20 @@ template(name='about')
             |BOULDER CREEK COMMUNITY VISION, MISSION AND 2018/19 PURPOSE STATEMENTS:
             |VISION:
             |Each community member is participating, individually and in community, in the creation of a sustainable society i.e., a heartfelt way of being together.
-            |MISSION:
+            .ui.header MISSION:
             |We are both a residential and non-residential community dedicated to happiness, personal growth and inspiration. We support short-term experiential community learning and living opportunities, as well as long-term community membership. We foster the growth of interpersonal relationships and belonging through:
-            |1)  being: creatively enjoying each others’ company and having fun;
-            |2)  expanding: growing personally through lifelong learning;
-            |3)  deepening: developing community living skills, furthering connection to self and others;
-            |4)  serving: contributing to the broader community/society;
-            |5)  sharing: offering resources, skills, knowledge, ideas, and experience;
-            |6)  supporting: cultivating the well-being of community members.
-            |2018/19 COMMUNITY PURPOSES:
+            .ui.list
+                .item 1)  being: creatively enjoying each others’ company and having fun;
+                .item 2)  expanding: growing personally through lifelong learning;
+                .item 3)  deepening: developing community living skills, furthering connection to self and others;
+                .item 4)  serving: contributing to the broader community/society;
+                .item 5)  sharing: offering resources, skills, knowledge, ideas, and experience;
+                .item 6)  supporting: cultivating the well-being of community members.
+            .ui.header 2018/19 COMMUNITY PURPOSES:
             |Our intention, this year, is to create community events that are creatively focused on 1) Higher Purpose, 2) Resonance and 3) Service
-            |1. EXPLORING OUR HIGHER PURPOSE in Intimate Relationships, Community, Environment, Business and Politics:
+            .ui.small.header 1. EXPLORING OUR HIGHER PURPOSE in Intimate Relationships, Community, Environment, Business and Politics:
             |WHAT IS A PURPOSE?   “Simply put, it’s a definitive statement about the difference that you are trying to make.”  Read More
-            |2. EXPLORING RESONANCE: 
+            .ui.small.header 2. EXPLORING RESONANCE: 
             |The central higher purpose and value of current Boulder Creek Community members is the intention and process of  individually and collectively deepening into our experience and expression of Resonance within and between ourselves.
             |Whenever and wherever we gather, we share this intention  and commitment to use each moment as an opportunity to become more resonant with ourselves and with each other regardless of the circumstances.
             |We recognize that this work, this opportunity, always begins with ourselves. Read More
