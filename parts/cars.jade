@@ -139,9 +139,9 @@ template(name='car_edit')
                         i.checkmark.big.icon
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
-                    +text_edit key='make' label='make' direct=true icon=''
-                    +text_edit key='model' label='model' direct=true icon=''
-                    +number_edit key='year' label='year' direct=true icon='users'
+                    // +text_edit key='make' label='make' direct=true icon=''
+                    // +text_edit key='model' label='model' direct=true icon=''
+                    // +number_edit key='year' label='year' direct=true icon='users'
                     // +text_edit key='servings' label='servings' direct=true
                     +link_edit key='link' label='link' icon='link'
                     div
@@ -162,7 +162,7 @@ template(name='car_view')
             .row
                 .four.wide.column
                     a.ui.basic.icon.button(href="/cars")
-                        +i name='cookbook'
+                        i.large.car.icon
                     .ui.inline.header
                         | #{title}
                         small car view
@@ -170,46 +170,19 @@ template(name='car_view')
                     div
                     a.ui.icon.button(href="/car/#{_id}/edit")
                         i.pencil.icon
-                    .ui.header 
-                        +i name='ingredients'
-                        |ingredients
-                    .ui.large.selection.link.animated.list
-                        each ingredients
-                            .item 
-                                .ui.header #{title}
                 .eight.wide.column
                     div.scrolling
                         +html_view key='directions' label='directions' direct=true
-                    +array_view key='ingredients' label='ingredients' icon='ingredients' direct=true
+                    +array_view key='tags' label='tags' icon='tags' direct=true
                     // +array_view key='tags' label='tags' icon='tags' direct=true
-                    .ui.header 
-                        +i name='popular-topic' cl='ui inline image'
-                        |reviews
-                    each car_reviews
-                        .ui.header #{when}
                     +comments
                     .ui.header 
                         i.clock.icon
                         |reservations
+                    each reservations
+                        a.ui.header(href="/reservation/#{_id}/view")
+                            |added #{when} by #{_author_username}
                 .four.wide.column
-                    +text_edit key='title' label='title' direct=true
-                    +image_edit key='image_id' label='image' direct=true
-                    +text_edit key='make' label='make' direct=true icon=''
-                    +text_edit key='model' label='model' direct=true icon=''
-                    +number_edit key='year' label='year' direct=true icon='users'
                     div
                     div
                     +html_view key='description' label='description' direct=true
-                    each cook_ids
-                        .ui.header #{this}
-                    unless is_fav
-                        .ui.basic.button.mark_fav 
-                            +i name='heart' cl='ui inline image'
-                            |favorite
-                    else
-                        .ui.basic.small.compact.button.unmark_fav 
-                            i.grey.undo.icon
-                            |mark unfavorite
-                    each favorite_user_ids
-                        .ui.header #{this}
-                        // +user_from_id this

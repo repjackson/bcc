@@ -1,21 +1,187 @@
-template(name='product_layout')
-    +nav
-    .ui.bottom.attached.pushable.segment
-        +topbar
-        +cartbar
-        +left_sidebar
-        +right_sidebar
-        +walletbar
-        #main_area.global_container.pusher.scrollin
-            with current_doc
-                .ui.stackable.padded.grid
+template(name='shop')
+    .ui.stackable.padded.grid
+        .four.wide.column
+            .ui.inline.header
+                |#{product_count}
+                |products
+            .ui.icon.input
+                if product_query
+                    i.remove.link.icon.clear_product_query(title='clear search')
+                else 
+                    i.search.icon
+                input#product_search(type='text' placeholder='title...' value=product_query)
+            if currentUser
+                a.ui.icon.button.add_product(title='add product')
+                    i.plus.green.large.icon
+            
+            // .ui.left.icon.search.input
+            //     i.search.icon.refresh_tags
+            //     input#search_ingredient.prompt(type='text' autocomplete="off" placeholder='ingredients')
+            // if picked_ingredient_plural
+            //     .ui.icon.black.compact.button.clear_picked_ingredients
+            //         i.remove.icon
+            // .ui.basic.icon.button.toggle_gf(class=toggle_gf_class)
+            //     +icolor name='no-gluten' cl='ui mini inline image'
+            // .ui.basic.icon.button.toggle_vegan(class=toggle_vegan_class)
+            //     +i name='vegan-food' cl='ui mini inline image'
+            each picked_ingredients
+                button.ui.blue.compact.small.button.unpick_ingredient(tabindex='0')
+                    //- i.remove.icon
+                    | #{this}
+            +i name='ingredients' cl='ui inline mini image'
+            each ingredients
+                button.ui.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
+                    //- small #{count}
+        .twelve.wide.column.scrolling
+            // each picked_sections
+            //     button.ui.blue.compact.small.button.unpick_section(tabindex='0')
+            //         //- i.remove.icon
+            //         | #{this}
+            // // div
+            // +i name='clock' cl='ui inline mini image'
+            // each sections
+            //     button.ui.compact.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
+            //         //- small #{count}
+            // // unless one_post
+            .sorting_row
+                if currentUser
+                    +session_toggle key='shop_filter_published' icon='eye'
+                // +session_set key='view_users' value='grid' icon='th' 
+                // +session_set key='view_users' value='list' icon='list'
+                // +session_set key='sort_users_direction' value='-1' icon='chevron down'
+                // +session_set key='sort_users_direction' value='1' icon='chevron up'
+                // +session_set key='sort_users_key' value='points' icon='coins'
+                // +session_set key='sort_users_key' value='created_date' icon='clock'
+                // +session_set key='view_limit' value=1
+                +session_set key='view_limit' value=10
+                +session_set key='view_limit' value=20
+                +session_set key='view_limit' value=50
+
+                
+                i.large.sort.icon
+                +set_product_sort_key key='price_usd' label='price' icon='money'
+                //- +set_product_sort_key key='_timestamp' label='added' icon='clock'
+                +set_product_sort_key key='comment_count' label='comment count' icon='chat'
+                +set_product_sort_key key='views' label='views' icon='eye'
+                +set_product_sort_key key='points' label='points' icon='line chart'
+                .ui.compact.icon.button.set_sort_direction(title='toggle sort direction')
+                    if sorting_up
+                        i.sort.amount.down.icon
+                    else
+                        i.sort.amount.up.icon
+                |&nbsp;
+                |&nbsp;
+                // .ui.compact.menu
+                //     .ui.simple.dropdown.item
+                //         strong #{product_limit}
+                //         i.dropdown.icon
+                //         .menu
+                        //   +set_product_limit amount=1
+                           +set_product_limit amount=5
+                           +set_product_limit amount=10
+                            +set_product_limit amount=20
+                .spacer 
+            if subs_ready
+                if one_post
+                    .ui.stackable.centered.one.column.grid
+                        each product_docs
+                            +product_card
+                else if two_posts
+                    .ui.stackable.centered.two.column.grid
+                        each product_docs
+                            +product_card
+                else if three_posts
+                    .ui.stackable.centered.three.column.grid
+                        each product_docs
+                            +product_card
+                else
+                    .ui.stackable.centered.three.column.grid
+                        each product_docs
+                            +product_card
+            else 
+                .ui.basic.center.aligned.segment
+                    i.massive.loading.food.icon
+
+
+
+
+
+        
+template(name='set_product_sort_key')
+    .ui.compact.basic.button.set_sort
+        if color
+            .ui.label(class=color) #{label}
+        else 
+            if emoji
+                em(data-emoji=emoji)
+            else if icon
+                i.icon(class=icon)
+            |#{label}
+        
+
+template(name='set_view_mode_product')
+    .item.set_view
+        i.icon(class=icon)
+        |#{title}
+
+
+template(name='set_product_limit')
+    .item.set_limit #{amount}
+
+
+
+template(name='product_card')
+    .center.aligned.column.zoomer(class=product_card_class title=ingredients)
+        if rescued 
+            .ui.top.right.attached.blue.label(title='rescued')
+                i.search.icon
+        if local 
+            .ui.top.right.attached.corner.green.label(title='local')
+                i.marker.icon
+        a(href="/product/#{_id}") 
+            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+        .content
+            a.ui.inline.header(href="/product/#{_id}") 
+                //- |#{_author.name}'s
+                | #{title}
+            //- if session_is 'view_ingredients' true
+            +ismall name='ingredients'
+            each ingredients
+                .ui.small.basic.label #{this}
+            if gluten_free
+                +i name='no-gluten' cl='ui mini inline image' title='gluten free'
+            if vegan
+                +i name='vegan-food' cl='ui mini inline image' title='vegan'
+            //- .ui.inline.small.header tags
+            // .content
+            //     .right.floated.meta
+            //         | {{from_now datetime_available}}
+            //     //- if session_is 'view_users' true
+            // //- a.image(href="/product/#{_id}")
+                
+        .content    
+            .ui.inline.header 
+                |${{fixed price_usd}}
+            i.big.link.cart.plus.icon.add_to_cart
+            if is_admin
+                a(href="/product/#{_id}/edit")
+                    i.pencil.link.icon
+            // .ui.inline.small.header 
+            //     |(#{menu_section}) 
+            // div
+            // .ui.inline.inline.small.grey.header #{views}
+                // i.eye.icon
+            // .ui.inline.inline.small.grey.header #{points} 
+                // i.line.chart.icon
+
+
+template(name='product_view')
+    with current_doc
+        .ui.stackable.padded.grid
                     .row
                         .six.wide.column
                             a.ui.basic.icon.button(href="/shop")
-                                i.chevron.left.large.icon
-                                // i.large.food.icon
-                                +i name='food-cart' cl='ui mini inline image'
-                        
+                                i.large.shop.icon
                             .ui.large.inline.header 
                                 //- small viewing
                                 | #{title}
@@ -26,147 +192,23 @@ template(name='product_layout')
                             // a(href="{{c.url image_id}}" target="_window")
                             img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                             div 
-                            +text_view key='size_description' label='size description'  direct=true
-                            +link_view key='product_link' label='link' icon='wordpress' direct=true
-                            +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
-                            +boolean_view key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
-                            +boolean_view key='no_sugar_added' label='no sugar added' direct=true icon='no-sugar2'
-                            +boolean_view key='vegan' label='vegan' direct=true icon='vegan-symbol'
-                            +boolean_view key='paleo' label='paleo' direct=true icon='caveman'
-                            +boolean_view key='local' label='local' direct=true icon='marker'
-                            +boolean_view key='nut_free' label='nut free' direct=true icon='no-peanut'
-                            +boolean_view key='rescued' label='rescued' direct=true icon='nothing-found'
-                            +boolean_view key='organic' label='organic' direct=true icon='organic-food'
-                            +boolean_view key='no_gmo' label='no gmo' direct=true icon='no-gmo'
-                            +boolean_view key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
-                            .ui.link.card.zoomer.goto_source
-                                img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                                .content
-                                    .ui.header.zoomer
-                                        |#{product_source.title}
-                            // .ui.header #{menu_section}
-                                    +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
-
+                            // +text_view key='size_description' label='size description'  direct=true
+                            // +link_view key='product_link' label='link' icon='wordpress' direct=true
                         .ten.wide.column
                             .ui.green.basic.inverted.large.button.add_to_cart
-                                // i.cart.plus.large.icon
-                                
-                                +i name='add-shopping-cart--v1' cl='ui avatar image'
-                                |add to cart
+                                i.cart.plus.large.icon
+                                |buy
 
-                            a.ui.basic.compact.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
-                                +i name='content' cl='ui avatar image'
-                                |description
-                            a.ui.basic.compact.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
-                                +i name='clock' cl='ui avatar image'
-                                |subscriptions
-                            a.ui.basic.compact.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
-                                +i name='list' cl='ui avatar image'
-                                |orders
-                            a.ui.basic.compact.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
-                                +i name='cookbook' cl='ui avatar image'
-                                |recipes
-                            a.ui.basic.compact.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
-                                +i name='popular-topic' cl='ui avatar image'
-                                |reviews
-                            // a.ui.basic.compact.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
-                            //     +i name='chat' cl='ui avatar image'
-                            //     |comments
-                            a.ui.basic.compact.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
-                                +i name='shield' cl='ui avatar image'
-                                |inventory
                             div
-                            +yield
-                            
-template(name='product_main')                            
-    +html_view key='description' direct=true
-    .ui.inline.header 
-        +i name='ingredients'
-        |ingredients
-    each ingredients
-        .ui.large.basic.label #{this}
-    div
-    +voting_full
-    +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
-    +link_view key='external_link' label='external link' icon='globe' direct=true
-    +comments
+                            +html_view key='description' direct=true
+                            +array_view key='tags' label='tags' icon='tags' direct=true
+                            div
+                            +voting_full
+                            +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
+                            +link_view key='external_link' label='external link' icon='globe' direct=true
+                            +comments
         
         
-template(name='product_inventory')      
-    .ui.inline.header 
-        +i name='shield'
-        |inventory
-    if is_admin
-        a.ui.icon.basic.button.add_inventory
-            i.plus.icon
-    .ui.list
-        each inventory_items
-            .item 
-                unless editing_this
-                    .ui.inline.header id: #{id}
-                    .ui.inline.header location: #{location}
-                    i.edit.link.icon.edit_inventory_item
-                if editing_this
-                    +number_edit key='id' label='id number' direct=true
-                    +text_edit key='location' label='location' icon='marker' direct=true
-                    i.checkmark.green.link.icon.save_inventory_item
-
-
-
-template(name='product_reviews')
-    .ui.inline.header 
-        +i name='popular-topic'
-        |reviews
-    .ui.circular.basic.icon.button.add_review
-        i.plus.icon
-    div
-    each product_recipes
-        a.ui.header(href="/recipe/#{_id}/view") #{title}
-        
-        
-        
-    
-    
-template(name='product_subscriptions')     
-    div
-    if subscribed
-        .ui.basic.green.inverted.button.unsubscribe
-            i.undo.icon
-            |unsubscribe
-    else
-        .ui.basic.green.inverted.button.subscribe
-            i.undo.icon
-            |subscribe
-    .ui.small.header 
-        +i name='clock'
-        |subs
-    .ui.link.selection.animated.list
-        each product_subs
-            a.item(href="/sub/#{_id}") 
-                |#{when} #{_author_username}
-                .ui.basic.label #{sub_day}
-                .ui.basic.label #{sub_frequency}
-    .ui.small.header 
-        |your subscriptions
-
-
-template(name='product_orders')                            
-    if can_order
-        +order_button
-    each subs
-        .ui.header #{_author_username}
-    .ui.header 
-        +i name='order-history'
-        |#{product_orders.count}
-        |orders
-        |(${{fixed product_order_total}})
-    .ui.basic.segments
-        each product_orders
-            +product_order_card
-    .ui.header #{views} views
-    +order_status_icons
-    .ui.hidden.divider
-                
 template(name='order_status_icons')  
     a.zoomer(href="/order/#{_id}")
         if runner_viewed
@@ -239,61 +281,17 @@ template(name='product_edit')
                         i.checkmark.large.icon   
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
-                    +link_edit key='product_link' label='old site link' direct=true
                     div
                     +float_edit key='price_usd' label='$ price' direct=true
                 .eight.wide.column
-                    +boolean_edit key='gluten_free' label='gluten free' direct=true icon='no-gluten'
-                    +boolean_edit key='paleo' label='paleo' direct=true icon='caveman'
-                    +boolean_edit key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
-                    +boolean_edit key='no_sugar_added' label='no sugar added' direct=true icon='no-sugar2'
-                    +boolean_edit key='vegan' label='vegan' direct=true icon='vegan-symbol'
-                    +boolean_edit key='no_gmo' label='no gmo' direct=true icon='no-gmo'
-                    +boolean_edit key='local' label='local' direct=true icon='marker'
-                    +boolean_edit key='nut_free' label='nut free' direct=true icon='no-peanut'
-                    +boolean_edit key='rescued' label='rescued' direct=true icon='nothing-found'
-                    +boolean_edit key='kosher' label='kosher' direct=true icon='kosher-food'
-                    +boolean_edit key='organic' label='organic' direct=true icon='organic-food'
-                    +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
-                    +number_edit key='calories' label='calories' direct=true
                     div
+                    +array_edit key='tags' label='tags' icon='tags' direct=true
+                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
+                    +html_edit key='description' label='description' direct=true
+                .four.wide.column
                     +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
                     +link_edit key='external_link' label='external link' icon='globe' direct=true
-                    +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
-                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
-                    +text_edit key='size_description' label='size description'  direct=true
-                    +html_edit key='description' label='description' direct=true
-                    +text_edit key='packaging' label='packaging' icon='package' direct=true
                     if can_delete
                         .ui.red.button.delete_product
                             i.remove.icon   
                             | delete
-                .four.wide.column
-                    .ui.header 
-                        +i name='field-and-tractor'
-                        |source
-                    with product_source
-                        a.ui.header(href="/source/#{_id}")
-                            img.ui.avatar.image(src="{{c.url image_id width=100 height=100 gravity='face' crop='fill'}}")
-                            |#{title}
-                        i.remove.link.circular.red.icon.remove_source
-                        // if is_admin
-                            
-                    unless source_id
-                        if is_admin
-                            .ui.icon.input 
-                                i.building.icon
-                                input.source_search(type='text' placeholder='search source title')
-                            each search_results
-                                .ui.header.pick_source #{title}
-                            
-                            
-                            
-                            
-                            
-
-
-template(name='pick_section')
-    .ui.big.image.label
-        img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
-        | #{title}

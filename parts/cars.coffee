@@ -125,7 +125,9 @@ if Meteor.isClient
             Session.get('car_sort_key')
             Session.get('car_sort_direction')
 
-        @autorun => @subscribe 'car_results'
+        @autorun => @subscribe 'car_results',
+            picked_tags.array()
+            picked_sections.array()
         @autorun => @subscribe 'car_count',
             picked_tags.array()
             picked_sections.array()
@@ -319,7 +321,7 @@ if Meteor.isServer
         # else
             # match.tags = $nin: ['wikipedia']
         sort = '_timestamp'
-        match.published = true
+        # match.published = true
             # match.source = $ne:'wikipedia'
         # if view_vegan
         #     match.vegan = true
