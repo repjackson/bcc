@@ -229,50 +229,58 @@ template(name='walletbar')
         +user_credit
         
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.menu.rightbar
+    .ui.right.sidebar.vertical.menu.rightbar
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
         with currentUser
             a.item.toggle_rightbar(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
-                +i name='dashboard' cl='ui avatar image'
-                // i.dashboard.icon
+                // +i name='dashboard' cl='ui avatar image'
+                i.dashboard.icon
                 |dashboard
             a.item.toggle_rightbar(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
-                +i name='money' cl='ui avatar image'
-                // i.coins.icon
+                // +i name='money' cl='ui avatar image'
+                i.coins.icon
                 |credit
             a.item.toggle_rightbar(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
-                +i name='check' cl='ui avatar image'
+                // +i name='check' cl='ui avatar image'
+                i.money.icon
                 |orders
             a.item.toggle_rightbar(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
-                +i name='clock' cl='ui avatar image'
+                // +i name='clock' cl='ui avatar image'
+                i.clock.icon
                 |subscriptions
             a.item.toggle_rightbar(href="/user/#{username}/pantry" class="{{isActiveRoute 'user_pantry'}}")
-                +i name='cupboard' cl='ui avatar image'
+                // +i name='cupboard' cl='ui avatar image'
+                i.food.icon
                 |pantry
             a.item.toggle_rightbar(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
-                +i name='friends' cl='ui avatar image'
+                // +i name='friends' cl='ui avatar image'
+                i.users.icon
                 |friends
             a.item.toggle_rightbar(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
-                +i name='shopping-cart' cl='ui avatar image'
+                i.cart.icon
+                // +i name='shopping-cart' cl='ui avatar image'
                 |cart
             a.item.toggle_rightbar(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
-                +i name='bicycle' cl='ui avatar image'
+                i.bicycle.icon
+                // +i name='bicycle' cl='ui avatar image'
                 |trips
-            a.item.toggle_rightbar(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
-                +i name='certificate' cl='ui avatar image'
-                |gift cards
+            // a.item.toggle_rightbar(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
+            //     +i name='certificate' cl='ui avatar image'
+            //     |gift cards
         // .ui.divider
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/edit" title='edit your account')
-            +i name='settings' cl='ui avatar image'
+            // +i name='settings' cl='ui avatar image'
+            // i.large.cog.icon
+            i.large.cog.icon
             |settings
         a.item.logout
             if is_logging_out
                 i.refresh.loading.icon
             else
-                +i name='exit-sign' cl='ui avatar image'
-                // i.sign.out.icon
+                // +i name='exit-sign' cl='ui avatar image'
+                i.sign.out.icon
             |logout
 
 
@@ -300,29 +308,33 @@ template(name='left_sidebar')
             .ui.avatar.image
                 +i name='food-cart' cl=''
             | #{product_count} products
-        a.item.toggle_leftbar(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
-            .ui.avatar.image
-                +i name='ingredients' cl=''
-            | #{ingredient_count} ingredients
-        a.item.toggle_leftbar(href='/sources' class="{{isActivePath '/sources'}}")
-            .ui.avatar.image.farm
-                +i name='field-and-tractor' cl=''
-            | #{source_count} sources
-        a.item.toggle_leftbar(href='/recipes' class="{{isActivePath '/recipes'}}")
-            .ui.avatar.image.info
-                +i name='cookbook' cl=''
-            |#{recipe_count} recipes
+        // a.item.toggle_leftbar(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
+            
+        //     .ui.avatar.image
+        //         +i name='ingredients' cl=''
+        //     | #{ingredient_count} ingredients
+        // a.item.toggle_leftbar(href='/sources' class="{{isActivePath '/sources'}}")
+        //     .ui.avatar.image.farm
+        //         +i name='field-and-tractor' cl=''
+        //     | #{source_count} sources
+        // a.item.toggle_leftbar(href='/recipes' class="{{isActivePath '/recipes'}}")
+        //     .ui.avatar.image.info
+        //         +i name='cookbook' cl=''
+        //     |#{recipe_count} recipes
         a.item.toggle_leftbar.zoomer(href='/trips' class="{{isActivePath '/trips'}}")
-            .ui.avatar.image.info
-                +i name='bicycle' cl=''
+            i.bicycle.icon
+            // .ui.avatar.image.info
+            //     +i name='bicycle' cl=''
             |#{recipe_count} trips
         //         // i.newspaper.icon
         //         strong.mobile.hidden get involved
         a.item.toggle_leftbar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
-            +i name='phone' cl='ui inline mini image'
+            i.phone.icon
+            // +i name='phone' cl='ui inline mini image'
             | contact
         a.item.toggle_leftbar.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            +i name='blog' cl='ui inline mini image'
+            i.newspaper.icon
+            // +i name='blog' cl='ui inline mini image'
             | #{post_count} posts
         if is_in_admin
             a.icon.item.toggle_admin.toggle_leftbar.no_blink
@@ -335,12 +347,15 @@ template(name='left_sidebar')
         if is_admin
             .divider
             a.item.set_model.toggle_leftbar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
-                +i name='shield' cl='ui inline mini image'
+                i.shield.icon
+                // +i name='shield' cl='ui inline mini image'
                 |admin
             a.item.set_user.toggle_leftbar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
-                +i name='groups' cl='ui inline mini image'
+                i.users.icon
+                // +i name='groups' cl='ui inline mini image'
                 | users
             a.item.toggle_leftbar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-                +i name='list' cl='ui inline mini image'
+                i.list.icon
+                // +i name='list' cl='ui inline mini image'
                 | orders
                 
